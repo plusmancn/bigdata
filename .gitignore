@@ -2,3 +2,5 @@ target/
 
 output/**
 !output/.gitKeep
+
+out/
