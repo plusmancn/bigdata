@@ -18,16 +18,15 @@ public class PageUsers {
     public static class TokenizerMapper
             extends Mapper<Object, Text, Text, IntWritable> {
 
-        private final static IntWritable pvCount = new IntWritable();
-        private Text pageId = new Text();
+        private final static IntWritable one = new IntWritable(1);
+        private Text groupKey = new Text();
 
         public void map(Object key, Text value, Context context
         ) throws IOException, InterruptedException {
             StringTokenizer itr = new StringTokenizer(value.toString(), ",");
 
-            pageId.set(itr.nextToken());
-            pvCount.set(Integer.valueOf(itr.nextToken()));
-            context.write(pageId, pvCount);
+            groupKey.set(itr.nextToken() + "\t" + itr.nextToken());
+            context.write(groupKey, one);
         }
     }
 
